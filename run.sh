@@ -24,6 +24,14 @@ else
   fi
 fi
 
+if [ "$SSLH_SSH_ENABLE" == "yes" ] ; then
+  if [ -n "$SSLH_SSH_PORT" ] ; then
+    ARGS=$ARGS" --ssh "$SSLH_SSH_ADDRESS":"$SSLH_SSH_PORT
+  else      
+    ARGS=$ARGS" --ssh "$SSLH_SSH_ADDRESS":22"
+  fi
+fi
+
 if [ "$SSLH_OPENVPN_ENABLE" == "yes" ] ; then
   if [ -n "$SSLH_OPENVPN_PORT" ] ; then
     ARGS=$ARGS" --openvpn "$SSLH_OPENVPN_ADDRESS":"$SSLH_OPENVPN_PORT
@@ -37,14 +45,6 @@ if [ "$SSLH_SSL_ENABLE" == "yes" ] ; then
     ARGS=$ARGS" --ssl "$SSLH_SSL_ADDRESS":"$SSLH_SSL_PORT
   else      
     ARGS=$ARGS" --ssl "$SSLH_SSL_ADDRESS":443"
-  fi
-fi
-
-if [ "$SSLH_SSH_ENABLE" == "yes" ] ; then
-  if [ -n "$SSLH_SSH_PORT" ] ; then
-    ARGS=$ARGS" --ssh "$SSLH_SSH_ADDRESS":"$SSLH_SSH_PORT
-  else      
-    ARGS=$ARGS" --ssh "$SSLH_SSH_ADDRESS":22"
   fi
 fi
 
